@@ -1,0 +1,4 @@
+GET http://localhost:1000/api/notes
+
+###
+DELETE http://localhost:1000/api/notes/1
