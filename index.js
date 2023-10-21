@@ -1,11 +1,15 @@
 const express = require('express')
 const app = express()
+const path = require('path')
 const cors = require('cors')
 app.use(cors())
 
+
+
 // Activated json-[parser]
 app.use(express.json())
-
+// app.use(express.static('build'))
+app.use(express.static(path.join(__dirname, 'build')))
 const requestLogger = (request,response,next) => {
     console.log('Method', request.method)
     console.log('Path', request.path)
@@ -42,8 +46,12 @@ let notes  = [
     }
 ]
 
-app.get('/', (request,response) => {
-    response.send('<h1>App Node JS</h1>')
+// app.get('/', (request,response) => {
+//     response.send('<h1>App Node JS</h1>')
+// })
+
+app.get('/', function (request,response) {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 
 app.get('/api/notes', (request,response) => {
